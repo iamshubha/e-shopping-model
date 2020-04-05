@@ -78,6 +78,7 @@ class ProductRowItem extends StatelessWidget {
           ),
         ],
       ),
+      
     );
 
     if (lastItem) {

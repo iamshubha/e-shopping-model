@@ -246,7 +246,7 @@ class ShoppingCartItem extends StatelessWidget {
                   },
                   child: const Icon(
                     CupertinoIcons.minus_circled,
-                    semanticLabel: 'Add',
+                    semanticLabel: 'Delete',
                   ),
                 ),
               ],
