@@ -11,6 +11,7 @@ class AppStateModel extends foundation.ChangeNotifier {
   // All the available products.
   List<Product> _availableProducts;
 
+
   // The currently selected category of products.
   Category _selectedCategory = Category.all;
 
