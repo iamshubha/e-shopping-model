@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'model/app_state_model.dart';
-import 'model/product.dart';
+import '../model/app_state_model.dart';
+import '../model/product.dart';
 import 'styles.dart';
 
 // const double _kDateTimePickerHeight = 216;
@@ -16,11 +16,13 @@ class ShoppingCartTab extends StatefulWidget {
 }
 
 class _ShoppingCartTabState extends State<ShoppingCartTab> {
+  
+
   String name;
   String email;
   String location;
   String pincode;
-  DateTime dateTime = DateTime.now();
+  // DateTime dateTime = DateTime.now();
   final _currencyFormat = NumberFormat.currency(symbol: '\Rs.');
 
   Widget _buildNameField() {
@@ -136,29 +138,38 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                 model.productsInCart.isNotEmpty) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                child: Column(
                   children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
-                        Text(
-                          'Shipping '
-                          '${_currencyFormat.format(model.shippingCost)}',
-                          style: Styles.productRowItemPrice,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          'Tax ${_currencyFormat.format(model.tax)}',
-                          style: Styles.productRowItemPrice,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          'Total  ${_currencyFormat.format(model.totalCost)}',
-                          style: Styles.productRowTotal,
-                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              'Shipping '
+                              '${_currencyFormat.format(model.shippingCost)}',
+                              style: Styles.productRowItemPrice,
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              'Tax ${_currencyFormat.format(model.tax)}',
+                              style: Styles.productRowItemPrice,
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              'Total  ${_currencyFormat.format(model.totalCost)}',
+                              style: Styles.productRowTotal,
+                            ),
+                          ],
+                        )
                       ],
-                    )
+                    ),
+                    CupertinoButton(child: Text('tap here'), onPressed: (){
+                      print(model.productsInCart.toString());//TODO: product detail
+                      print(name.toString());
+                      print(model.totalCost.toString());
+                    }),
                   ],
                 ),
               );

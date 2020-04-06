@@ -1,9 +1,23 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutterapp/model/app_state_model.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutterapp/shopping_location_tab.dart';
-import 'Body/product_list_tab.dart';
-import 'Body/search_tab.dart';
-import 'Body/shopping_cart_tab.dart';
-// import 'product_list_tab.dart';
+import 'product_list_tab.dart';
+import 'search_tab.dart';
+import 'shopping_cart_tab.dart';
+
+class Abcd extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+       child: ChangeNotifierProvider<AppStateModel>(
+      create: (context) => AppStateModel()..loadProducts(),
+      child: CupertinoStoreApp(),
+    ),
+      
+    );
+  }
+}
 
 class CupertinoStoreApp extends StatelessWidget {
   @override
