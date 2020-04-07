@@ -1,4 +1,3 @@
- 
 import 'package:flutter/foundation.dart' as foundation;
 
 import 'product.dart';
@@ -10,7 +9,6 @@ double _shippingCostPerItem = 7;
 class AppStateModel extends foundation.ChangeNotifier {
   // All the available products.
   List<Product> _availableProducts;
-
 
   // The currently selected category of products.
   Category _selectedCategory = Category.all;
@@ -50,6 +48,18 @@ class AppStateModel extends foundation.ChangeNotifier {
           return accumulator + itemCount;
         });
   }
+  
+  // // My Created : Total shipping cost for the items in the cart.
+  // double get shpngCost{
+  //       double a = if (subtotalCost >= 400) {
+  //          mins;
+  //       } else { maxs;
+  //       };
+  //               return a;
+  // }
+
+  int maxs = 60;
+  int mins = 0;
 
   // Sales tax for the items in the cart
   double get tax {
@@ -87,8 +97,7 @@ class AppStateModel extends foundation.ChangeNotifier {
   void addProductToCart(int productId) {
     if (!_productsInCart.containsKey(productId)) {
       _productsInCart[productId] = 1;
-    }
-     else {
+    } else {
       _productsInCart[productId]++;
     }
 

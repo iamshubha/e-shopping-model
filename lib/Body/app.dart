@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutterapp/Body/Addon_Page/add_page.dart';
-import 'package:flutterapp/model/app_state_model.dart';
+import 'package:flutterapp/Body/model/app_state_model.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutterapp/shopping_location_tab.dart';
 import 'product_list_tab.dart';
 import 'search_tab.dart';
 import 'shopping_cart_tab.dart';
@@ -11,11 +11,10 @@ class Abcd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-       child: ChangeNotifierProvider<AppStateModel>(
-      create: (context) => AppStateModel()..loadProducts(),
-      child: CupertinoStoreApp(),
-    ),
-      
+      child: ChangeNotifierProvider<AppStateModel>(
+        create: (context) => AppStateModel()..loadProducts(),
+        child: CupertinoStoreApp(),
+      ),
     );
   }
 }
@@ -26,16 +25,14 @@ class CupertinoStoreApp extends StatelessWidget {
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
       home: CupertinoStoreHomePage(),
-      
     );
   }
 }
 
-
 class CupertinoStoreHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
+    return CupertinoTabScaffold( 
       
       tabBar: CupertinoTabBar(
         items: const <BottomNavigationBarItem>[
@@ -56,14 +53,16 @@ class CupertinoStoreHomePage extends StatelessWidget {
           //   title: Text('location'),
           // ),
         ],
+        currentIndex: 2,//TODO: specifi the starting page
       ),
       tabBuilder: (context, index) {
+        
         CupertinoTabView returnValue;
         switch (index) {
           case 0:
             returnValue = CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
-                child:AddHomePage(),// ProductListTab(),
+                child: AddHomePage(), // ProductListTab(),
               );
             });
             break;
@@ -81,7 +80,6 @@ class CupertinoStoreHomePage extends StatelessWidget {
               );
             });
             break;
-           
         }
         return returnValue;
       },

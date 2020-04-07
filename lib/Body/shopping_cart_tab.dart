@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutterapp/Body/model/app_state_model.dart';
+import 'package:flutterapp/Body/model/product.dart';
 import 'package:flutterapp/Service/services/auth.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../model/app_state_model.dart';
-import '../model/product.dart';
+// import '../model/app_state_model.dart';
+// import '../model/product.dart';
 import 'styles.dart';
 
 // const double _kDateTimePickerHeight = 216;
@@ -29,15 +32,19 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
   String name;
   String email;
   String location;
+  String phonenumber;
   String pincode;
   // DateTime dateTime = DateTime.now();
   final _currencyFormat = NumberFormat.currency(symbol: '\Rs.');
 
+  //
+  // bool submitEnable = name.isNotEmpty;
+  //
   Widget _buildNameField() {
     return CupertinoTextField(
       prefix: const Icon(
-        CupertinoIcons.person_solid,
-        color: CupertinoColors.lightBackgroundGray,
+        CupertinoIcons.person,
+        color: CupertinoColors.darkBackgroundGray,
         size: 28,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
@@ -52,7 +59,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
           ),
         ),
       ),
-      placeholder: 'Name',
+      placeholder: 'Full Name',
       onChanged: (newName) {
         setState(() {
           name = newName;
@@ -64,8 +71,8 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
   Widget _buildEmailField() {
     return CupertinoTextField(
       prefix: const Icon(
-        CupertinoIcons.person_solid,
-        color: CupertinoColors.lightBackgroundGray,
+        CupertinoIcons.mail,
+        color: CupertinoColors.darkBackgroundGray,
         size: 28,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
@@ -91,17 +98,20 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
     );
   }
 
-  Widget _buildPincodeField() {
+  Widget _buildPhoneNumberField() {
     return CupertinoTextField(
       prefix: const Icon(
-        CupertinoIcons.person_solid,
-        color: CupertinoColors.lightBackgroundGray,
+        CupertinoIcons.phone,
+        color: CupertinoColors.darkBackgroundGray,
         size: 28,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
       clearButtonMode: OverlayVisibilityMode.editing,
       // textCapitalization: TextCapitalization.words,
       keyboardType: TextInputType.number,
+      maxLength: 10,
+      maxLines: 1,
+      maxLengthEnforced: true,
 
       autocorrect: false,
       decoration: const BoxDecoration(
@@ -112,14 +122,28 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
           ),
         ),
       ),
-      placeholder: 'Name',
-      onChanged: (newPincode) {
+      placeholder: 'Phone Number',
+      onChanged: (newphonenumber) {
         setState(() {
-          pincode = newPincode;
+          phonenumber = newphonenumber;
         });
       },
     );
   }
+
+  var _PincodeList = ['741404', '741402', '741401'];
+
+  Widget _dropDownField() {
+    return DropdownButton(
+        items: _PincodeList.map((String dropDownStringItem) {
+          return DropdownMenuItem(
+            child: Text(dropDownStringItem),
+            value: dropDownStringItem,
+          );
+        }).toList(),
+        onChanged: null);
+  }
+  // Widget _dsddsds(){return CupertinoPicker(itemExtent: 1 ,onSelectedItemChanged: null, children: null);}
 
   // Widget _buildEmailField() {
   //   return const CupertinoTextField(
@@ -148,12 +172,46 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
   //     },
   //   );
   // }
+  Widget _buildPinCodeField() {
+    return CupertinoTextField(
+      prefix: const Icon(
+        Icons.person_pin_circle,
+        // color: CupertinoColors.lightBackgroundGray,
+        color: Colors.black38,
+        size: 28,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
+      clearButtonMode: OverlayVisibilityMode.editing,
+      // textCapitalization: TextCapitalization.words,
+      keyboardType: TextInputType.number,
+      maxLength: 6,
+
+      maxLines: 1,
+      maxLengthEnforced: true,
+
+      autocorrect: false,
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            width: 0,
+            color: CupertinoColors.inactiveGray,
+          ),
+        ),
+      ),
+      placeholder: 'Pin Code',
+      onChanged: (newPinCode) {
+        setState(() {
+          pincode = newPinCode;
+        });
+      },
+    );
+  }
 
   Widget _buildLocationField() {
     return const CupertinoTextField(
       prefix: Icon(
-        CupertinoIcons.location_solid,
-        color: CupertinoColors.lightBackgroundGray,
+        CupertinoIcons.location,
+        color: CupertinoColors.darkBackgroundGray,
         size: 28,
       ),
       padding: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
@@ -182,36 +240,41 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: _buildNameField(),
             );
-          case 1:
+          case 2:
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: _buildEmailField(),
             );
-          case 2:
+          case 4:
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: _buildLocationField(),
             );
-            case 3:
+          case 1:
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: _buildPincodeField(),
+              child: _buildPhoneNumberField(),
             );
-          case 4:
+          case 3:
             return Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-              // padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-              child: CupertinoButton(
-                  child: Text('tap here'),
-                  onPressed: () {
-                    print(name.toString());
-                    print(email.toString());
-                    print(model.totalCost.toString());
-                    print(
-                        model.productsInCart.toString()); //TODO: product detail
-                    // _signOut(context);
-                  }),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: _buildPinCodeField(),
             );
+          // case 4:
+          //   return Padding(
+          //     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+          //     // padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+          //     child: CupertinoButton(
+          //         child: Text('tap here'),
+          //         onPressed: () {
+          //           print(name.toString());
+          //           print(email.toString());
+          //           print(model.totalCost.toString());
+          //           print(
+          //               model.productsInCart.toString()); //TODO: product detail
+          //           // _signOut(context);
+          //         }),
+          //   );
           default:
             if (model.productsInCart.length > productIndex) {
               return ShoppingCartItem(
@@ -236,7 +299,9 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                           children: <Widget>[
                             Text(
                               'Shipping '
-                              '${_currencyFormat.format(model.shippingCost)}',
+                              '${(_currencyFormat.format(model.shippingCost))}'
+                              '-'
+                              '${model.subtotalCost > 400 ? 0 : 60}', //TODO: Shipping is here
                               style: Styles.productRowItemPrice,
                             ),
                             const SizedBox(height: 6),
@@ -254,7 +319,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                       ],
                     ),
                     CupertinoButton(
-                        child: Text('tap here'),
+                        child: Text('Proceed to checkout'),
                         onPressed: () {
                           print(model.productsInCart
                               .toString()); //TODO: product detail

@@ -14,9 +14,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp/Body/model/app_state_model.dart';
 import 'package:provider/provider.dart';
 
-import '../model/app_state_model.dart';
 import 'product_row_item.dart';
 
 class ProductListTab extends StatelessWidget {
