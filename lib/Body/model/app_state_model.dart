@@ -77,7 +77,8 @@ class AppStateModel extends foundation.ChangeNotifier {
       return [];
     }
 
-    if (_selectedCategory == Category.all) {
+    // if (_selectedCategory == Category.all) { //TODO: product come from here
+      if (_selectedCategory == Category.accessories) {
       return List.from(_availableProducts);
     } else {
       return _availableProducts.where((p) {

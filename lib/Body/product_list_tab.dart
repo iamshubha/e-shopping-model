@@ -38,13 +38,10 @@ class ProductListTab extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     if (index < products.length) {
-                      return FlatButton(
-                        onPressed: () {},//TODO: item from here//TODO: it is flat button for navigate here from the category repo
-                        child: ProductRowItem(
-                          index: index,
-                          product: products[index],
-                          lastItem: index == products.length - 1,
-                        ),
+                      return ProductRowItem(//TODO: item from here//TODO: it is flat button for navigate here from the category repo
+                        index: index,
+                        product: products[index],
+                        lastItem: index == products.length - 1,
                       );
                     }
 

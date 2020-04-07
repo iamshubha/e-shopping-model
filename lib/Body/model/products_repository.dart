@@ -16,6 +16,9 @@ import 'product.dart';
 
 class ProductsRepository {
   static const _allProducts = <Product>[
+
+    
+
     Product(
       category: Category.accessories,
       id: 0,
@@ -325,8 +328,12 @@ class ProductsRepository {
   static List<Product> loadProducts(Category category) {
     if (category == Category.all) {
       return _allProducts;
-    } else {
+    }if (category == Category.accessories) {
+      return null;//TODO: Define category here
+    }
+     else {
       return _allProducts.where((p) => p.category == category).toList();
     }
   }
+ 
 }
