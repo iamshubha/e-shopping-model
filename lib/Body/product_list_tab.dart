@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../model/app_state_model.dart';
@@ -37,10 +38,13 @@ class ProductListTab extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     if (index < products.length) {
-                      return ProductRowItem(
-                        index: index,
-                        product: products[index],
-                        lastItem: index == products.length - 1,
+                      return FlatButton(
+                        onPressed: () {},//TODO: item from here//TODO: it is flat button for navigate here from the category repo
+                        child: ProductRowItem(
+                          index: index,
+                          product: products[index],
+                          lastItem: index == products.length - 1,
+                        ),
                       );
                     }
 

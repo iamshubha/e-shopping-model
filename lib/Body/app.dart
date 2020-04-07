@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutterapp/Body/Addon_Page/add_page.dart';
 import 'package:flutterapp/model/app_state_model.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutterapp/shopping_location_tab.dart';
@@ -62,7 +63,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
           case 0:
             returnValue = CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
-                child: ProductListTab(),
+                child:AddHomePage(),// ProductListTab(),
               );
             });
             break;
@@ -80,13 +81,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
               );
             });
             break;
-            // case 3:
-            // returnValue = CupertinoTabView(builder: (context) {
-            //   return CupertinoPageScaffold(
-            //     child: ShoppingCartTab1(),
-            //   );
-            // });
-            // break;
+           
         }
         return returnValue;
       },

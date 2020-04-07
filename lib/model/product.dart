@@ -43,7 +43,7 @@ class Product {
   final String brandname;
   final int price;
 
-  String get assetName => '$id-0.jpg';
+  String get assetName => '$id-0.jpg'; //TODO: Solve here for imgages
   String get assetPackage => 'shrine_images';
 
   @override
