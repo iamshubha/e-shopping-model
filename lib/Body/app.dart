@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/Body/Addon_Page/add_page.dart';
 import 'package:flutterapp/Body/model/app_state_model.dart';
 import 'package:provider/provider.dart';
-import 'product_list_tab.dart';
 import 'search_tab.dart';
 import 'shopping_cart_tab.dart';
 
@@ -53,7 +52,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
           //   title: Text('location'),
           // ),
         ],
-        currentIndex: 2,//TODO: specifi the starting page
+        currentIndex: 0,//TODO: specifi the starting page
       ),
       tabBuilder: (context, index) {
         
