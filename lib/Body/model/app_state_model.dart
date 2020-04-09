@@ -9,9 +9,11 @@ double _shippingCostPerItem = 7;
 class AppStateModel extends foundation.ChangeNotifier {
   // All the available products.
   List<Product> _availableProducts;
+  List<Product> _availableAccssoriesProduct;
 
   // The currently selected category of products.
   Category _selectedCategory = Category.all;
+  Category _selectedAccssoriesCategory = Category.accessories;
 
   // The IDs and quantities of products currently in the cart.
   final _productsInCart = <int, int>{};
@@ -48,15 +50,6 @@ class AppStateModel extends foundation.ChangeNotifier {
           return accumulator + itemCount;
         });
   }
-  
-  // // My Created : Total shipping cost for the items in the cart.
-  // double get shpngCost{
-  //       double a = if (subtotalCost >= 400) {
-  //          mins;
-  //       } else { maxs;
-  //       };
-  //               return a;
-  // }
 
   int maxs = 60;
   int mins = 0;
@@ -77,12 +70,26 @@ class AppStateModel extends foundation.ChangeNotifier {
       return [];
     }
 
-    if (_selectedCategory == Category.all) { //TODO: product come from here
+    if (_selectedCategory == Category.all) {
+      //TODO: product come from here
       // if (_selectedCategory == Category.accessories) {
       return List.from(_availableProducts);
     } else {
       return _availableProducts.where((p) {
         return p.category == _selectedCategory;
+      }).toList();
+    }
+  }
+
+  List<Product> getAccssoriesProducts() {
+    if (_availableAccssoriesProduct == null) {
+      return [];
+    }
+      if (_selectedAccssoriesCategory == Category.accessories) {
+      return List.from(_availableAccssoriesProduct);
+    } else {
+      return _availableAccssoriesProduct.where((p) {
+        return p.category == _selectedAccssoriesCategory;
       }).toList();
     }
   }
@@ -132,6 +139,8 @@ class AppStateModel extends foundation.ChangeNotifier {
   // Loads the list of available products from the repo.
   void loadProducts() {
     _availableProducts = ProductsRepository.loadProducts(Category.all);
+    _availableAccssoriesProduct = ProductsRepository.loadProducts(Category.accessories);
+
     notifyListeners();
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutterapp/Body/Addon_Page/newlist.dart';
 import 'package:flutterapp/Body/product_list_tab.dart';
 
 class AddPage extends StatelessWidget {
@@ -16,17 +17,35 @@ class AddHomePage extends StatelessWidget {
     // ProductListTab(),
     return CupertinoPageScaffold(
         child: Center(
-      child: CupertinoButton(
-        child: Text('press here'),
-        onPressed: () {
-          
-          Navigator.of(context).push(
-            CupertinoPageRoute(
-              builder: (context) => ProductListTab(),
-            ),
-          );
-          // Navigator.of(context).pop(context);
-        },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          CupertinoButton(
+            child: Text('press here'),
+            onPressed: () {
+              
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  builder: (context) => ProductListTab(),
+                ),
+              );
+              // Navigator.of(context).pop(context);
+            },
+          ),
+          CupertinoButton(
+            child: Text('press here'),
+            onPressed: () {
+              
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  builder: (context) => ProductAssListTab(),
+                ),
+              );
+              // Navigator.of(context).pop(context);
+            },
+          ),
+        ],
       ),
     ));
   }

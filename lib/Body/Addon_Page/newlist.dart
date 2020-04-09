@@ -17,14 +17,15 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/Body/model/app_state_model.dart';
 import 'package:provider/provider.dart';
 
-import 'product_row_item.dart';
+import '../product_row_item.dart';
 
-class ProductListTab extends StatelessWidget {
+
+class ProductAssListTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppStateModel>(
       builder: (context, model, child) {
-        final products = model.getAccssoriesProducts();
+        final products = model.getProducts();
         return CustomScrollView(
           semanticChildCount: products.length,
           slivers: <Widget>[

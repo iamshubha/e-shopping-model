@@ -13,12 +13,10 @@
 // limitations under the License.
 
 import 'product.dart';
+import 'product.dart';
 
 class ProductsRepository {
   static const _allProducts = <Product>[
-
-    
-
     Product(
       category: Category.accessories,
       id: 0,
@@ -325,15 +323,89 @@ class ProductsRepository {
     ),
   ];
 
+  static const _allAccssoriesProduct = <Product>[
+    Product(
+      category: Category.accessories,
+      id: 0,
+      isFeatured: true,
+      name: 'Vagabond sack',
+      brandname: 'abc',
+      price: 120,
+    ),
+    Product(
+      category: Category.accessories,
+      id: 1,
+      isFeatured: true,
+      brandname: 'cde',
+      name: 'Stella sunglasses',
+      price: 58,
+    ),
+    Product(
+      category: Category.accessories,
+      id: 2,
+      isFeatured: false,
+      brandname: 'fhd',
+      name: 'Whitney belt',
+      price: 35,
+    ),
+    Product(
+      category: Category.accessories,
+      id: 3,
+      isFeatured: true,
+      brandname: 'fkd',
+      name: 'Garden strand',
+      price: 98,
+    ),
+    Product(
+      category: Category.accessories,
+      id: 4,
+      isFeatured: false,
+      name: 'Strut earrings',
+      price: 34,
+      brandname: 'lll',
+    ),
+    Product(
+      category: Category.accessories,
+      id: 5,
+      brandname: 'ffs',
+      isFeatured: false,
+      name: 'Varsity socks',
+      price: 12,
+    ),
+    Product(
+      category: Category.accessories,
+      id: 6,
+      brandname: 'sgs',
+      isFeatured: false,
+      name: 'Weave keyring',
+      price: 16,
+    ),
+    Product(
+      category: Category.accessories,
+      id: 7,
+      brandname: 'gsr',
+      isFeatured: true,
+      name: 'Gatsby hat',
+      price: 40,
+    ),
+    Product(
+      category: Category.accessories,
+      id: 8,
+      brandname: 'gwg',
+      isFeatured: true,
+      name: 'Shrug bag',
+      price: 198,
+    ),
+  ];
+
   static List<Product> loadProducts(Category category) {
     if (category == Category.all) {
       return _allProducts;
-    }if (category == Category.accessories) {
-      return null;//TODO: Define category here
     }
-     else {
+    if (category == Category.accessories) {
+      return _allAccssoriesProduct; //TODO: Define category here
+    } else {
       return _allProducts.where((p) => p.category == category).toList();
     }
   }
- 
 }
