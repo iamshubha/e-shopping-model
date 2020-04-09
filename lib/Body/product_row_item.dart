@@ -33,7 +33,7 @@ class ProductRowItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: Image.asset(
-              product.assetName,
+              product.assetName,//TODO change image from here
               package: product.assetPackage,
               fit: BoxFit.cover,
               width: 76,

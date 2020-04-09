@@ -23,6 +23,7 @@ class ProductsRepository {
       isFeatured: true,
       name: 'Vagabond sack',
       brandname: 'abc',
+      
       price: 120,
     ),
     Product(
