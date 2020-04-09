@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutterapp/Body/Addon_Page/newlist.dart';
+import 'package:flutterapp/Body/Category_Page/newlist.dart';
 import 'package:flutterapp/Body/product_list_tab.dart';
 
 class AddPage extends StatelessWidget {
