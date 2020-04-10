@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/Body/Addon_Page/add_page.dart';
+import 'package:flutterapp/Body/info_page/info_page.dart';
 import 'package:flutterapp/Body/model/app_state_model.dart';
 import 'package:provider/provider.dart';
 import 'search_tab.dart';
@@ -36,8 +37,12 @@ class CupertinoStoreHomePage extends StatelessWidget {
       tabBar: CupertinoTabBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
+            icon: Icon(Icons.info_outline),
+            title: Text('Info'),
+          ),
+          BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.home),
-            title: Text('Products'),
+            title: Text('Home'),
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.search),
@@ -52,7 +57,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
           //   title: Text('location'),
           // ),
         ],
-        currentIndex: 0,//TODO: specifi the starting page
+        currentIndex: 1,//TODO: specifi the starting page
       ),
       tabBuilder: (context, index) {
         
@@ -61,18 +66,25 @@ class CupertinoStoreHomePage extends StatelessWidget {
           case 0:
             returnValue = CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
-                child: AddHomePage(), // ProductListTab(),
+                child: InfoPage(), // ProductListTab(),
               );
             });
             break;
           case 1:
             returnValue = CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
-                child: SearchTab(),
+                child: AddHomePage(), // ProductListTab(),
               );
             });
             break;
           case 2:
+            returnValue = CupertinoTabView(builder: (context) {
+              return CupertinoPageScaffold(
+                child: SearchTab(),
+              );
+            });
+            break;
+          case 3:
             returnValue = CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
                 child: ShoppingCartTab(),

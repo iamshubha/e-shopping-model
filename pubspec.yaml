@@ -22,13 +22,14 @@ dependencies:
   
   intl: 
   shrine_images: 
+  cloud_firestore: ^0.13.4+2
+  carousel_slider: ^1.4.1
 
   # flutter_auth_buttons: ^0.7.0
   firebase_auth: ^0.15.5+3
   google_sign_in: ^4.3.0
   # provider: ^4.0.4
   provider: ^3.0.0+1
-  cloud_firestore:
   neumorphic: ^0.1.2
   fancy_bar: ^1.2.0
   translator: ^0.1.4
@@ -58,6 +59,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   # assets:
+    
   assets:
     - packages/shrine_images/0-0.jpg
     - packages/shrine_images/1-0.jpg
