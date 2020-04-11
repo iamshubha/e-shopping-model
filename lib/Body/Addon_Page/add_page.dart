@@ -20,101 +20,102 @@ class AddHomePage extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
         child: CupertinoPageScaffold(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            CSlider(),
-            SizedBox(width: 10, height: 10.0),
-            SizedBox(
-              child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              CSlider(),
+              SizedBox(width: 10, height: 10.0),
+              SizedBox(
+                child: Center(
                   child: Text(
-                'Category',
-                style: GoogleFonts.pacifico(
-                  textStyle: TextStyle(
-                    color: CupertinoColors.black,
-                    fontSize: 20,
+                    'Category',
+                    style: GoogleFonts.pacifico(
+                      textStyle: TextStyle(
+                        color: CupertinoColors.black,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ),
-              )),
-            ),
-            Column(
-              children: <Widget>[
-                Row(
-                  // crossAxisAlignment: CrossAxisAlignment.,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      child: CupertinoButton(
-                        child: Image.asset('packages/shrine_images/21-0.jpg'),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            CupertinoPageRoute(
-                              builder: (context) => ProductListTab(),
-                            ),
-                          );
-                          // Navigator.of(context).pop(context);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: CupertinoButton(
-                        child: Image.asset(
-                          'packages/shrine_images/0-0.jpg',
-                          // height: 80,
+              ),
+              Column(
+                children: <Widget>[
+                  Row(
+                    // crossAxisAlignment: CrossAxisAlignment.,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                        child: CupertinoButton(
+                          child: Image.asset('packages/shrine_images/21-0.jpg'),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              CupertinoPageRoute(
+                                builder: (context) => ProductListTab(),
+                              ),
+                            );
+                            // Navigator.of(context).pop(context);
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            CupertinoPageRoute(
-                              builder: (context) => ProductAssListTab(),
-                            ),
-                          );
-                          // Navigator.of(context).pop(context);
-                        },
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  // crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Expanded(
-                      child: CupertinoButton(
-                        child: Image.asset('packages/shrine_images/21-0.jpg'),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            CupertinoPageRoute(
-                              builder: (context) => ProductListTab(),
-                            ),
-                          );
-                          // Navigator.of(context).pop(context);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: CupertinoButton(
-                        child: Image.asset(
-                          'packages/shrine_images/0-0.jpg',
-                          // height: 80,
+                      Expanded(
+                        child: CupertinoButton(
+                          child: Image.asset(
+                            'packages/shrine_images/0-0.jpg',
+                            // height: 80,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              CupertinoPageRoute(
+                                builder: (context) => ProductAssListTab(),
+                              ),
+                            );
+                            // Navigator.of(context).pop(context);
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            CupertinoPageRoute(
-                              builder: (context) => ProductAssListTab(),
-                            ),
-                          );
-                          // Navigator.of(context).pop(context);
-                        },
                       ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-
-          ],
-        )),
+                    ],
+                  ),
+                  Row(
+                    // crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                        child: CupertinoButton(
+                          child: Image.asset('packages/shrine_images/21-0.jpg'),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              CupertinoPageRoute(
+                                builder: (context) => ProductListTab(),
+                              ),
+                            );
+                            // Navigator.of(context).pop(context);
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: CupertinoButton(
+                          child: Image.asset(
+                            'packages/shrine_images/0-0.jpg',
+                            // height: 80,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              CupertinoPageRoute(
+                                builder: (context) => ProductAssListTab(),
+                              ),
+                            );
+                            // Navigator.of(context).pop(context);
+                          },
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

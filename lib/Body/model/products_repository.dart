@@ -24,7 +24,7 @@ class ProductsRepository {
       name: 'Vagabond sack',
       brandname: 'abc',
       
-      price: 120,
+      price: 1,
     ),
     Product(
       category: Category.accessories,
@@ -331,7 +331,7 @@ class ProductsRepository {
       isFeatured: true,
       name: 'Vagabond sack',
       brandname: 'abc',
-      price: 120,
+      price: 1,
     ),
     Product(
       category: Category.accessories,

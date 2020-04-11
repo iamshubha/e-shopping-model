@@ -14,6 +14,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutterapp/Body/model/app_state_model.dart';
+import 'package:flutterapp/Body/shopping_cart_tab.dart';
 import 'package:provider/provider.dart';
 
 import 'product_row_item.dart';

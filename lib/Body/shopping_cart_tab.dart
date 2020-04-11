@@ -1,16 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutterapp/Body/model/app_state_model.dart';
 import 'package:flutterapp/Body/model/product.dart';
 import 'package:flutterapp/Service/services/auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-// import '../model/app_state_model.dart';
-// import '../model/product.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'styles.dart';
-
-// const double _kDateTimePickerHeight = 216;
 
 class ShoppingCartTab extends StatefulWidget {
   @override
@@ -20,6 +18,13 @@ class ShoppingCartTab extends StatefulWidget {
 }
 
 class _ShoppingCartTabState extends State<ShoppingCartTab> {
+  static const platform = const MethodChannel("razorpay_flutter");
+
+  Razorpay _razorpay;
+  AppStateModel _mdldescription;
+
+  // static String totalCost = _mdldescription.totalCost.toString();
+
   Future<void> _signOut(BuildContext context) async {
     try {
       final auth = Provider.of<AuthBase>(context, listen: false);
@@ -131,47 +136,10 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
     );
   }
 
+  // String ct = AppStateModel().totalCost.toString();
+
   var _PincodeList = ['741404', '741402', '741401'];
 
-  Widget _dropDownField() {
-    return DropdownButton(
-        items: _PincodeList.map((String dropDownStringItem) {
-          return DropdownMenuItem(
-            child: Text(dropDownStringItem),
-            value: dropDownStringItem,
-          );
-        }).toList(),
-        onChanged: null);
-  }
-  // Widget _dsddsds(){return CupertinoPicker(itemExtent: 1 ,onSelectedItemChanged: null, children: null);}
-
-  // Widget _buildEmailField() {
-  //   return const CupertinoTextField(
-  //       prefix: Icon(
-  //       CupertinoIcons.mail_solid,
-  //       color: CupertinoColors.lightBackgroundGray,
-  //       size: 28,
-  //     ),
-  //     padding: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
-  //     clearButtonMode: OverlayVisibilityMode.editing,
-  //     keyboardType: TextInputType.emailAddress,
-  //     autocorrect: false,
-  //     decoration: BoxDecoration(
-  //       border: Border(
-  //         bottom: BorderSide(
-  //           width: 0,
-  //           color: CupertinoColors.inactiveGray,
-  //         ),
-  //       ),
-  //     ),
-  //     placeholder: 'Email',
-  //     onChanged: (newEmail) {
-  //       setState(() {
-  //         email = newEmail;
-  //       });
-  //     },
-  //   );
-  // }
   Widget _buildPinCodeField() {
     return CupertinoTextField(
       prefix: const Icon(
@@ -260,21 +228,6 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: _buildPinCodeField(),
             );
-          // case 4:
-          //   return Padding(
-          //     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-          //     // padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-          //     child: CupertinoButton(
-          //         child: Text('tap here'),
-          //         onPressed: () {
-          //           print(name.toString());
-          //           print(email.toString());
-          //           print(model.totalCost.toString());
-          //           print(
-          //               model.productsInCart.toString()); //TODO: product detail
-          //           // _signOut(context);
-          //         }),
-          //   );
           default:
             if (model.productsInCart.length > productIndex) {
               return ShoppingCartItem(
@@ -299,7 +252,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                           children: <Widget>[
                             Text(
                               'Shipping '
-                              '${(_currencyFormat.format(model.shippingCost))}'
+                              // '${(_currencyFormat.format(model.shippingCost))}'
                               '-'
                               '${model.subtotalCost > 400 ? 0 : 60}', //TODO: Shipping is here
                               style: Styles.productRowItemPrice,
@@ -320,14 +273,23 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                     ),
                     CupertinoButton(
                         child: Text('Proceed to checkout'),
-                        onPressed: () {
-                          print(model.productsInCart
-                              .toString()); //TODO: product detail
-                          print(name.toString());
-                          print(email.toString());
-                          print(model.totalCost.toString());
-                          // _signOut(context);
-                        }),
+                        // onPressed: () {
+                        //   print(model.productsInCart
+                        //       .toString()); //TODO: product detail
+                        //   print(name.toString());
+                        //   print(email.toString());
+                        //   print(model.totalCost.toString());
+                        //   print(_mdldescription.totalCost);
+                        //   // print(model.totalCost);
+                        //   // opencheckout();
+                        //   // model.clearCart();
+                        //   // openCheckout();
+                        //   // print(_mdldescription.totalCost.toInt());
+                        //   // openCheckout();
+                        //   // opn();
+                        // }
+                        onPressed: openCheckout,
+                        ),
                   ],
                 ),
               );
@@ -358,6 +320,60 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _razorpay.clear();
+  }
+
+  void openCheckout() async {
+    AppStateModel appStateModel;
+    var options = {
+      'key': 'rzp_test_mbGThThmVnkCw0',
+      'amount': _mdldescription.totalCost * 100,
+      'name': name, //'Acme Corp.',
+      'description': 'Fine T-Shirt',
+      'prefill': {
+        'contact': phonenumber,
+        'email': email
+      }, //'test@razorpay.com'},
+      'external': {
+        'wallets': ['paytm']
+      }
+    };
+
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      debugPrint(e);
+    }
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    Fluttertoast.showToast(
+        msg: "SUCCESS: " + response.paymentId, timeInSecForIosWeb: 4);
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    Fluttertoast.showToast(
+        msg: "ERROR: " + response.code.toString() + " - " + response.message,
+        timeInSecForIosWeb: 4);
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {
+    Fluttertoast.showToast(
+        msg: "EXTERNAL_WALLET: " + response.walletName, timeInSecForIosWeb: 4);
   }
 }
 
