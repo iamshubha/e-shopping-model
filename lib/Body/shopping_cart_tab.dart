@@ -21,7 +21,8 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
   static const platform = const MethodChannel("razorpay_flutter");
 
   Razorpay _razorpay;
-  AppStateModel _mdldescription;
+  // AppStateModel _mdldescription;
+  // Todo _todo;
 
   // static String totalCost = _mdldescription.totalCost.toString();
 
@@ -273,22 +274,23 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                     ),
                     CupertinoButton(
                         child: Text('Proceed to checkout'),
-                        // onPressed: () {
-                        //   print(model.productsInCart
-                        //       .toString()); //TODO: product detail
-                        //   print(name.toString());
-                        //   print(email.toString());
-                        //   print(model.totalCost.toString());
-                        //   print(_mdldescription.totalCost);
-                        //   // print(model.totalCost);
-                        //   // opencheckout();
-                        //   // model.clearCart();
-                        //   // openCheckout();
-                        //   // print(_mdldescription.totalCost.toInt());
-                        //   // openCheckout();
-                        //   // opn();
-                        // }
-                        onPressed: openCheckout,
+                        onPressed: () {
+                          print(model.productsInCart
+                              .toString()); //TODO: product detail
+                          print(name.toString());
+                          print(email.toString());
+                          print(model.totalCost.toString());
+                          // print(totcst);
+                          // print(model.totalCost);
+                          // opencheckout();
+                          // model.clearCart();
+                          // openCheckout();
+                          // print(_mdldescription.totalCost.toInt());
+                          // openCheckout();
+                          // opn();
+                          openCheckout(model);
+                        }
+                        // onPressed: openCheckout,
                         ),
                   ],
                 ),
@@ -337,13 +339,14 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
     _razorpay.clear();
   }
 
-  void openCheckout() async {
-    AppStateModel appStateModel;
+  void openCheckout(AppStateModel model) async {
+    // final Todo todo = ;// = ModalRoute.of(context).settings.arguments;
+
     var options = {
       'key': 'rzp_test_mbGThThmVnkCw0',
-      'amount': _mdldescription.totalCost * 100,
+      'amount': model.totalCost * 100,
       'name': name, //'Acme Corp.',
-      'description': 'Fine T-Shirt',
+      'description': model.productsInCart.toString(), //'Fine T-Shirt',
       'prefill': {
         'contact': phonenumber,
         'email': email

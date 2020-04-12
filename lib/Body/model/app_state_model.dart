@@ -6,6 +6,7 @@ import 'products_repository.dart';
 double _salesTaxRate = 0;
 double _shippingCostPerItem = 7;
 
+
 class AppStateModel extends foundation.ChangeNotifier {
   // All the available products.
   List<Product> _availableProducts;
@@ -44,12 +45,12 @@ class AppStateModel extends foundation.ChangeNotifier {
   }
 
   // Total shipping cost for the items in the cart.
-  // double get shippingCost {
-  //   return _shippingCostPerItem *
-  //       _productsInCart.values.fold(0.0, (accumulator, itemCount) {
-  //         return accumulator + itemCount;
-  //       });
-  // }
+  double get shippingCost {
+    return _shippingCostPerItem *
+        _productsInCart.values.fold(0.0, (accumulator, itemCount) {
+          return accumulator + itemCount;
+        });
+  }
 
   int maxs = 60;
   int mins = 0;
@@ -61,7 +62,7 @@ class AppStateModel extends foundation.ChangeNotifier {
 
   // Total cost to order everything in the cart.
   double get totalCost {
-    return subtotalCost ;//+ shippingCost + tax;
+    return subtotalCost;// + shippingCost + tax;
   }
 
   // Returns a copy of the list of available products, filtered by category.
