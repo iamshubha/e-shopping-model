@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import 'product.dart';
-import 'product.dart';
 
 class ProductsRepository {
   static const _allProducts = <Product>[

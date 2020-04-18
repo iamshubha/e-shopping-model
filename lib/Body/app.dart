@@ -66,6 +66,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
           case 0:
             returnValue = CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
+              
                 child: InfoPage(), // ProductListTab(),
               );
             });

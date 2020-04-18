@@ -51,9 +51,16 @@ class AppStateModel extends foundation.ChangeNotifier {
           return accumulator + itemCount;
         });
   }
+  // double get spngCost{
+  //  return if (subtotalCost >= 400) {
+  //     mins.toInt();
+  //   } else {
+  //     maxs.toInt();
+  //   };
+  // }
 
-  int maxs = 60;
-  int mins = 0;
+  double maxs = 60;
+  double mins = 0;
 
   // Sales tax for the items in the cart
   double get tax {
@@ -62,7 +69,7 @@ class AppStateModel extends foundation.ChangeNotifier {
 
   // Total cost to order everything in the cart.
   double get totalCost {
-    return subtotalCost;// + shippingCost + tax;
+    return subtotalCost;// + spngCost;// + shippingCost + tax;
   }
 
   // Returns a copy of the list of available products, filtered by category.

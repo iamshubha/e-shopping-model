@@ -253,7 +253,8 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
                           children: <Widget>[
                             Text(
                               'Shipping '
-                              // '${(_currencyFormat.format(model.shippingCost))}'
+                              '${(_currencyFormat.format(model.shippingCost))}'
+                              // '${(_currencyFormat.format(model.spngCost))}'
                               '-'
                               '${model.subtotalCost > 400 ? 0 : 60}', //TODO: Shipping is here
                               style: Styles.productRowItemPrice,
