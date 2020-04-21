@@ -89,6 +89,8 @@ class AppStateModel extends foundation.ChangeNotifier {
     }
   }
 
+
+  //Accssorices froduce function
   List<Product> getAccssoriesProducts() {
     if (_availableAccssoriesProduct == null) {
       return [];

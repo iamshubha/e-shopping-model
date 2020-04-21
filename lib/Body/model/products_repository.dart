@@ -142,7 +142,8 @@ class ProductsRepository {
     Product(
         category: Category.home,
         id: 16,
-        brandname: 'hfi',
+        // brandname: 'hfi',
+        brandname: 'vjhhbkj',
         isFeatured: true,
         name: 'Succulent planters',
         price: 16,
