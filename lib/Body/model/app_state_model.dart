@@ -128,6 +128,7 @@ class AppStateModel extends foundation.ChangeNotifier {
   // Returns the Product instance matching the provided id.
   Product getProductById(int id) {
     return _availableProducts.firstWhere((p) => p.id == id);
+    // return _availableAccssoriesProduct.firstWhere((p) => p.id == id);
   }
 
   // Removes everything from the cart.
