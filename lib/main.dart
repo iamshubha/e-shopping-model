@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/Service/app/landing_page.dart';
+import 'package:flutterapp/Service/widgets/daily_notice.dart';
 import 'package:provider/provider.dart';
 
 import 'Service/services/auth.dart';

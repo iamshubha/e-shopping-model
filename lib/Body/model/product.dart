@@ -29,22 +29,24 @@ class Product {
     @required this.name,
     @required this.brandname,
     @required this.price,
+    @required this.image,
   })  : assert(category != null, 'category must not be null'),
         assert(id != null, 'id must not be null'),
         assert(isFeatured != null, 'isFeatured must not be null'),
         assert(name != null, 'name must not be null'),
         assert(brandname != null, 'name must not be null'),
         assert(price != null, 'price must not be null');
-
+  
   final Category category;
   final int id;
   final bool isFeatured;
   final String name;
   final String brandname;
   final int price;
+  final String image;
 
-  String get assetName => '$id-0.jpg'; //TODO: Solve here for imgages
-  String get assetPackage => 'shrine_images';
+  // String get assetName => '$id-0.jpg'; //TODO: Solve here for imgages
+  // String get assetPackage => 'shrine_images';
 
   @override
   String toString() => '$name (id=$id)';

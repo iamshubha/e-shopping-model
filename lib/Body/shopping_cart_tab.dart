@@ -344,7 +344,7 @@ class _ShoppingCartTabState extends State<ShoppingCartTab> {
     // final Todo todo = ;// = ModalRoute.of(context).settings.arguments;
 
     var options = {
-      'key': 'rzp_test_mbGThThmVnkCw0',
+      'key': 'rzp_test_tztX4UNia1WvJP',
       'amount': model.totalCost * 100,
       'name': name, //'Acme Corp.',
       'description': model.productsInCart.toString(), //'Fine T-Shirt',
@@ -441,8 +441,9 @@ class ShoppingCartItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: Image.asset(
-                product.assetName,
-                package: product.assetPackage,
+                // product.assetName,
+                // package: product.assetPackage,
+                product.image,
                 fit: BoxFit.cover,
                 width: 40,
                 height: 40,

@@ -33,6 +33,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold( 
+      backgroundColor: Colors.grey,
       
       tabBar: CupertinoTabBar(
         items: const <BottomNavigationBarItem>[
@@ -66,7 +67,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
           case 0:
             returnValue = CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
-              
+              backgroundColor: Colors.grey,
                 child: InfoPage(), // ProductListTab(),
               );
             });
@@ -74,6 +75,7 @@ class CupertinoStoreHomePage extends StatelessWidget {
           case 1:
             returnValue = CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
+                backgroundColor: Colors.grey,
                 child: AddHomePage(), // ProductListTab(),
               );
             });

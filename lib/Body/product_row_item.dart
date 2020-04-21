@@ -34,8 +34,9 @@ class ProductRowItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: Image.asset(
-              product.assetName,//TODO change image from here
-              package: product.assetPackage,
+              // product.assetName,//TODO change image from here
+              // package: product.assetPackage,
+              product.image,
               fit: BoxFit.cover,
               width: 76,
               height: 76,
@@ -70,13 +71,19 @@ class ProductRowItem extends StatelessWidget {
             padding: EdgeInsets.zero,
             onPressed: () {
               final model = Provider.of<AppStateModel>(context, listen: false);
+              
               model.addProductToCart(product.id);
             },
-            child: const Icon(
-              CupertinoIcons.plus_circled,
-              semanticLabel: 'Add',
-            ),
+            // child: const Icon(
+            //   CupertinoIcons.plus_circled,
+            //   semanticLabel: 'Add',
+            // ),
+            child: Text('Add to cart'),
           ),
+          // FlatButton(onPressed: (){
+          //   final model = Provider.of<AppStateModel>(context, listen: false);
+          //     model.addProductToCart(product.id);
+          // }, child: null)
         ],
       ),
       
