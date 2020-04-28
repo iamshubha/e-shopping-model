@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' as foundation;
+import 'package:flutterapp/Body/model/datamodel.dart';
 
 import 'product.dart';
 import 'products_repository.dart';
@@ -85,7 +87,7 @@ class AppStateModel extends foundation.ChangeNotifier {
     if (_availableAccssoriesProduct == null) {
       return [];
     }
-      if (_selectedAccssoriesCategory == Category.accessories) {
+    if (_selectedAccssoriesCategory == Category.accessories) {
       return List.from(_availableAccssoriesProduct);
     } else {
       return _availableAccssoriesProduct.where((p) {
@@ -139,7 +141,8 @@ class AppStateModel extends foundation.ChangeNotifier {
   // Loads the list of available products from the repo.
   void loadProducts() {
     _availableProducts = ProductsRepository.loadProducts(Category.all);
-    _availableAccssoriesProduct = ProductsRepository.loadProducts(Category.accessories);
+    _availableAccssoriesProduct =
+        ProductsRepository.loadProducts(Category.accessories);
 
     notifyListeners();
   }

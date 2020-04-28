@@ -3,16 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/Body/Addon_Page/add_page.dart';
 import 'package:flutterapp/Body/info_page/info_page.dart';
 import 'package:flutterapp/Body/model/app_state_model.dart';
+import 'package:flutterapp/Body/model/datamodel.dart';
+import 'package:flutterapp/Body/model/panu.dart';
 import 'package:provider/provider.dart';
+import 'info_page/info_page.dart';
+import 'model/app_state_model.dart';
 import 'search_tab.dart';
 import 'shopping_cart_tab.dart';
 
 class Abcd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+   final ProductModel productModelDatabase = ProductModel(); 
     return Container(
-      child: ChangeNotifierProvider<AppStateModel>(
-        create: (context) => AppStateModel()..loadProducts(),
+      child: StreamProvider(
+        create: (BuildContext context) => productModelDatabase.getData(),//dataMoodel.get,
         child: CupertinoStoreApp(),
       ),
     );
@@ -32,8 +37,8 @@ class CupertinoStoreApp extends StatelessWidget {
 class CupertinoStoreHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold( 
-      
+    final AppStateModel appStateModel = AppStateModel();
+    return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -57,16 +62,15 @@ class CupertinoStoreHomePage extends StatelessWidget {
           //   title: Text('location'),
           // ),
         ],
-        currentIndex: 1,//TODO: specifi the starting page
+        currentIndex: 1, //TODO: specifi the starting page
       ),
       tabBuilder: (context, index) {
-        
         CupertinoTabView returnValue;
         switch (index) {
           case 0:
             returnValue = CupertinoTabView(builder: (context) {
               return CupertinoPageScaffold(
-                child: InfoPage(), // ProductListTab(),
+                child: InfoPage(), //InfoPage(), // ProductListTab(),
               );
             });
             break;

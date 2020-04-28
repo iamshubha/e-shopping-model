@@ -6,11 +6,7 @@ import 'package:flutterapp/Service/services/auth.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-// import '../model/app_state_model.dart';
-// import '../model/product.dart';
 import 'styles.dart';
-
-// const double _kDateTimePickerHeight = 216;
 
 class ShoppingCartTab extends StatefulWidget {
   @override
@@ -18,6 +14,7 @@ class ShoppingCartTab extends StatefulWidget {
     return _ShoppingCartTabState();
   }
 }
+
 
 class _ShoppingCartTabState extends State<ShoppingCartTab> {
   Future<void> _signOut(BuildContext context) async {
