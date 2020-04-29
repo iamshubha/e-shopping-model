@@ -1,23 +1,19 @@
+import 'package:fancy_bar/fancy_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/Body/Addon_Page/add_page.dart';
-import 'package:flutterapp/Body/info_page/info_page.dart';
-import 'package:flutterapp/Body/model/app_state_model.dart';
 import 'package:flutterapp/Body/model/datamodel.dart';
 import 'package:flutterapp/Body/model/panu.dart';
 import 'package:provider/provider.dart';
-import 'info_page/info_page.dart';
-import 'model/app_state_model.dart';
-import 'search_tab.dart';
-import 'shopping_cart_tab.dart';
+import '../Service/services/auth.dart';
 
 class Abcd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   final ProductModel productModelDatabase = ProductModel(); 
+    final ProductModel productModelDatabase = ProductModel();
     return Container(
       child: StreamProvider(
-        create: (BuildContext context) => productModelDatabase.getData(),//dataMoodel.get,
+        create: (BuildContext context) => productModelDatabase.getData(),
+        //dataMoodel.get,
         child: CupertinoStoreApp(),
       ),
     );
@@ -27,77 +23,140 @@ class Abcd extends StatelessWidget {
 class CupertinoStoreApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CupertinoStoreHomePage(),
+      // home: CupertinoStoreHomePage(),
+      home: TouchPage(),
     );
   }
 }
 
-class CupertinoStoreHomePage extends StatelessWidget {
+class TouchPage extends StatefulWidget {
+  @override
+  _TouchPageState createState() => _TouchPageState();
+}
+
+class _TouchPageState extends State<TouchPage> {
+  TabController tabController;
+  int _currentPage = 0;
+  final _pages = [HomeBody(), HomeBody(), HomeBody()];
+
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.signOut();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final AppStateModel appStateModel = AppStateModel();
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info_outline),
-            title: Text('Info'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.home),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.search),
-            title: Text('Search'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.shopping_cart),
-            title: Text('Cart'),
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(CupertinoIcons.location),
-          //   title: Text('location'),
-          // ),
-        ],
-        currentIndex: 1, //TODO: specifi the starting page
+    return Material(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('bazzar'),
+          centerTitle: true,
+          backgroundColor: Colors.green,
+          actions: <Widget>[
+            FlatButton(
+              child: Icon(Icons.exit_to_app),
+              onPressed: () => _signOut(context),
+            )
+          ],
+        ),
+        // drawer: Drawer(),
+        body: _pages[_currentPage],
+        bottomNavigationBar: BtmNvBFancy(context),
       ),
-      tabBuilder: (context, index) {
-        CupertinoTabView returnValue;
-        switch (index) {
-          case 0:
-            returnValue = CupertinoTabView(builder: (context) {
-              return CupertinoPageScaffold(
-                child: InfoPage(), //InfoPage(), // ProductListTab(),
-              );
-            });
-            break;
-          case 1:
-            returnValue = CupertinoTabView(builder: (context) {
-              return CupertinoPageScaffold(
-                child: AddHomePage(), // ProductListTab(),
-              );
-            });
-            break;
-          case 2:
-            returnValue = CupertinoTabView(builder: (context) {
-              return CupertinoPageScaffold(
-                child: SearchTab(),
-              );
-            });
-            break;
-          case 3:
-            returnValue = CupertinoTabView(builder: (context) {
-              return CupertinoPageScaffold(
-                child: ShoppingCartTab(),
-              );
-            });
-            break;
-        }
-        return returnValue;
+    );
+  }
+
+  Widget BtmNvBFancy(BuildContext context) {
+    return FancyBottomBar(
+      type: FancyType.FancyV1,
+      items: [
+        FancyItem(
+          textColor: Colors.grey,
+          title: 'Category',
+          icon: Icon(Icons.category),
+        ),
+        FancyItem(
+          textColor: Colors.grey,
+          title: 'Home',
+          icon: Icon(Icons.home),
+        ),
+        FancyItem(
+          textColor: Colors.grey,
+          title: 'Home',
+          icon: Icon(Icons.shopping_basket),
+        ),
+      ],
+      onItemSelected: (index) {
+        setState(() {
+          _currentPage = index;
+        });
       },
+    );
+  }
+}
+
+class HomeBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    List productDataList = Provider.of<List<DataMoodel>>(context);
+    return Scaffold(
+      body: productDataList == null
+          ? CircularProgressIndicator()
+          : ListView.builder(
+              itemCount: productDataList.length,
+              itemBuilder: (_, int index) => Padding(
+                padding: EdgeInsets.all(3.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Row(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 20, left: 10, right: 30),
+                          child: Image.network(
+                            productDataList[index].image,
+                            width: 130,
+                            height: 90,
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(productDataList[index].name),
+                            Text(productDataList[index].bname),
+                            Text(productDataList[index].price)
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            // final model =
+                            //     Provider.of<DataMoodel>(context, listen: false);
+                            // model.addProductToCart(productDataList[index].pid);
+                            print(productDataList[index].pid + '${productDataList[index].price}'+'${productDataList[index].name}');
+                          },
+                          child: Text('data'),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
     );
   }
 }

@@ -392,9 +392,6 @@ class ShoppingCartItem extends StatelessWidget {
                 CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
-                    final model =
-                        Provider.of<AppStateModel>(context, listen: false);
-                    model.addProductToCart(product.id);
                   },
                   child: const Icon(
                     CupertinoIcons.plus_circled,

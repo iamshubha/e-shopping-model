@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 // import '../../Body/mainbody.dart';
 
 class LandingPage extends StatelessWidget {
-  @override
+  @override   
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthBase>(context, listen: false);
     return StreamBuilder<User>(
